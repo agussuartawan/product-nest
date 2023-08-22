@@ -17,20 +17,50 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const product_entity_1 = require("../entity/product.entity");
 const typeorm_2 = require("typeorm");
+const simple_response_dto_1 = require("../dto/response/simple-response.dto");
 let ProductService = exports.ProductService = class ProductService {
     constructor(productRepo) {
         this.productRepo = productRepo;
     }
     findAll() {
-        return this.productRepo.find();
+        return this.productRepo.find({
+            where: {
+                deletedAt: null
+            }
+        });
     }
     findOne(id) {
-        return this.productRepo.findOneBy({ id });
+        return this.productRepo.findOneBy({ id })
+            .then(r => {
+            if (r == null)
+                throw new common_1.NotFoundException("Product not found");
+            return r;
+        });
     }
     create(req) {
         let product = new product_entity_1.Product();
         product = this.map(req, product);
         return this.productRepo.save(product).then(r => r.mapToRes());
+    }
+    async update(req, id) {
+        let product = await this.productRepo.findOneBy({ id })
+            .then(r => {
+            if (r == null)
+                throw new common_1.NotFoundException("Product not found");
+            else
+                return r;
+        });
+        product = this.map(req, product);
+        return this.productRepo.save(product).then(r => r.mapToRes());
+    }
+    async delete(id) {
+        const isExists = await this.productRepo.createQueryBuilder("product")
+            .where("product.id = :id", { id: id })
+            .getExists();
+        if (!isExists) {
+            throw new common_1.NotFoundException("Product not found");
+        }
+        return await this.productRepo.delete(id).then(r => new simple_response_dto_1.SimpleResponseDto(null, "Product deleted", "Product deleted perfectly"));
     }
     map(req, entity) {
         entity.name = req.name;

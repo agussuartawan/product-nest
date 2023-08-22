@@ -4,6 +4,7 @@ import { AppService } from "./app.service"
 import { TypeOrmModule } from "@nestjs/typeorm"
 import { ProductModule } from "./module/product.module"
 import { CartModule } from "./module/cart.module"
+import * as process from "process"
 
 @Module({
   imports: [

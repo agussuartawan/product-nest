@@ -8,4 +8,6 @@ export declare class ProductController {
     listALl(): Promise<Product[]>;
     findById(id: string): Promise<Product>;
     create(req: ProductRequest): Promise<SimpleResponseDto>;
+    update(id: string, req: ProductRequest): Promise<SimpleResponseDto>;
+    delete(id: string): Promise<SimpleResponseDto>;
 }

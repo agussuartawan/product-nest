@@ -8,5 +8,7 @@ export declare class ProductService {
     findAll(): Promise<Product[]>;
     findOne(id: string): Promise<Product | null>;
     create(req: ProductRequest): Promise<SimpleResponseDto>;
+    update(req: ProductRequest, id: string): Promise<SimpleResponseDto>;
+    delete(id: string): Promise<SimpleResponseDto>;
     private map;
 }
