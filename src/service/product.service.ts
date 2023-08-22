@@ -2,8 +2,8 @@ import { Body, Injectable } from "@nestjs/common"
 import { InjectRepository } from "@nestjs/typeorm"
 import { Product } from "../entity/product.entity"
 import { Repository } from "typeorm"
-import { ProductRequest } from "../dto/request/product.request"
 import { SimpleResponseDto } from "../dto/response/simple-response.dto"
+import ProductRequest from "../dto/request/product.request"
 
 @Injectable()
 export class ProductService {
@@ -19,13 +19,18 @@ export class ProductService {
     }
 
     create(req: ProductRequest): Promise<SimpleResponseDto> {
-        const product = new Product()
-        product.name = req.name
-        product.description = req.description
-        product.category = req.category
-        product.price = req.price
-        product.stock = req.stock
+        let product = new Product()
+        product = this.map(req, product)
         return  this.productRepo.save(product).then(r => r.mapToRes())
+    }
+
+    private map(req: ProductRequest, entity: Product): Product {
+        entity.name = req.name
+        entity.description = req.description
+        entity.category = req.category
+        entity.price = req.price
+        entity.stock = req.stock
+        return entity
     }
 
 }

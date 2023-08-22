@@ -1,0 +1,1 @@
+{"version":3,"file":"simple-response.dto.js","sourceRoot":"","sources":["../../../src/dto/response/simple-response.dto.ts"],"names":[],"mappings":";;;AAAA,MAAa,iBAAiB;IAC1B,YAAY,EAAU,EAAE,OAAe,EAAE,OAAe;QACpD,IAAI,CAAC,EAAE,GAAG,EAAE,CAAA;QACZ,IAAI,CAAC,OAAO,GAAG,OAAO,CAAC;QACvB,IAAI,CAAC,OAAO,GAAG,OAAO,CAAC;IAC3B,CAAC;CAKJ;AAVD,8CAUC"}
