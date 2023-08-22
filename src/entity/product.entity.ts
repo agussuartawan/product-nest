@@ -1,5 +1,4 @@
-import { Column, CreateDateColumn, Double, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
-import { collectAllDependants } from "ts-loader/dist/utils"
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm"
 import { Cart } from "./cart.entity"
 import { SimpleResponseDto } from "../dto/response/simple-response.dto"
 

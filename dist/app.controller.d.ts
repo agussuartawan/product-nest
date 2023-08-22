@@ -1,4 +1,4 @@
-import { AppService } from './app.service';
+import { AppService } from "./app.service";
 import { SimpleResponseDto } from "./dto/response/simple-response.dto";
 export declare class AppController {
     private readonly appService;

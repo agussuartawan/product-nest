@@ -28,13 +28,17 @@ let ProductService = exports.ProductService = class ProductService {
         return this.productRepo.findOneBy({ id });
     }
     create(req) {
-        const product = new product_entity_1.Product();
-        product.name = req.name;
-        product.description = req.description;
-        product.category = req.category;
-        product.price = req.price;
-        product.stock = req.stock;
+        let product = new product_entity_1.Product();
+        product = this.map(req, product);
         return this.productRepo.save(product).then(r => r.mapToRes());
+    }
+    map(req, entity) {
+        entity.name = req.name;
+        entity.description = req.description;
+        entity.category = req.category;
+        entity.price = req.price;
+        entity.stock = req.stock;
+        return entity;
     }
 };
 exports.ProductService = ProductService = __decorate([

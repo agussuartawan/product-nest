@@ -1,6 +1,6 @@
-import {Body, Controller, Get, Param, Query, Req} from '@nestjs/common';
-import { AppService } from './app.service';
-import {SimpleResponseDto} from "./dto/response/simple-response.dto";
+import { Body, Controller, Get, Param, Query } from "@nestjs/common"
+import { AppService } from "./app.service"
+import { SimpleResponseDto } from "./dto/response/simple-response.dto"
 
 @Controller("api/v1/learn")
 export class AppController {

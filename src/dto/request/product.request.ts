@@ -1,4 +1,4 @@
-class ProductRequest {
+export class ProductRequest {
     name: string
     description: string
     category: string
@@ -13,5 +13,3 @@ class ProductRequest {
         this.stock = stock
     }
 }
-
-export default ProductRequest

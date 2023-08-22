@@ -1,9 +1,9 @@
-import { Body, Injectable } from "@nestjs/common"
+import { Injectable } from "@nestjs/common"
 import { InjectRepository } from "@nestjs/typeorm"
 import { Product } from "../entity/product.entity"
 import { Repository } from "typeorm"
 import { SimpleResponseDto } from "../dto/response/simple-response.dto"
-import ProductRequest from "../dto/request/product.request"
+import { ProductRequest } from "../dto/request/product.request"
 
 @Injectable()
 export class ProductService {
