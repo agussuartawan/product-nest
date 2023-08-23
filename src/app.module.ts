@@ -4,6 +4,7 @@ import { AppService } from "./app.service"
 import { TypeOrmModule } from "@nestjs/typeorm"
 import { ProductModule } from "./module/product.module"
 import { CartModule } from "./module/cart.module"
+import { FirebaseModule } from "./firebase/firebase.module"
 
 @Module({
     imports: [
@@ -20,6 +21,7 @@ import { CartModule } from "./module/cart.module"
         }),
         ProductModule,
         CartModule,
+        FirebaseModule,
     ],
     controllers: [AppController],
     providers: [AppService],

@@ -13,6 +13,7 @@ const app_service_1 = require("./app.service");
 const typeorm_1 = require("@nestjs/typeorm");
 const product_module_1 = require("./module/product.module");
 const cart_module_1 = require("./module/cart.module");
+const firebase_module_1 = require("./firebase/firebase.module");
 let AppModule = exports.AppModule = class AppModule {
 };
 exports.AppModule = AppModule = __decorate([
@@ -31,6 +32,7 @@ exports.AppModule = AppModule = __decorate([
             }),
             product_module_1.ProductModule,
             cart_module_1.CartModule,
+            firebase_module_1.FirebaseModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
