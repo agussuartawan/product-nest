@@ -5,6 +5,7 @@ export declare class Cart {
     qty: number;
     createdAt: Date;
     updateAt: Date;
+    deletedAt?: Date;
     product: Product;
     mapToRes(): SimpleResponse;
     constructor(qty: number, product: Product);

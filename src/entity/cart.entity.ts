@@ -1,6 +1,7 @@
 import {
     Column,
     CreateDateColumn,
+    DeleteDateColumn,
     Entity,
     ManyToOne,
     PrimaryGeneratedColumn,
@@ -22,6 +23,9 @@ export class Cart {
 
     @UpdateDateColumn()
     updateAt: Date
+
+    @DeleteDateColumn()
+    deletedAt?: Date
 
     @ManyToOne(() => Product, (product) => product.carts, { eager: true })
     product: Product

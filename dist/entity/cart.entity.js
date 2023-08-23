@@ -39,6 +39,10 @@ __decorate([
     __metadata("design:type", Date)
 ], Cart.prototype, "updateAt", void 0);
 __decorate([
+    (0, typeorm_1.DeleteDateColumn)(),
+    __metadata("design:type", Date)
+], Cart.prototype, "deletedAt", void 0);
+__decorate([
     (0, typeorm_1.ManyToOne)(() => product_entity_1.Product, (product) => product.carts, { eager: true }),
     __metadata("design:type", product_entity_1.Product)
 ], Cart.prototype, "product", void 0);

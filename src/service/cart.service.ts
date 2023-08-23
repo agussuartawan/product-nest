@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common"
+import { Injectable, NotFoundException } from "@nestjs/common"
 import { InjectRepository } from "@nestjs/typeorm"
 import { Cart } from "../entity/cart.entity"
 import { Repository } from "typeorm"
@@ -32,7 +32,12 @@ export class CartService {
     }
 
     async create(req: CartRequest): Promise<SimpleResponse> {
-        const product = await this.productRepo.findOneBy({ id: req.productId })
+        const product = await this.productRepo
+            .findOneBy({ id: req.productId })
+            .then((r) => {
+                if (!r) throw new NotFoundException("Product not found")
+                else return r
+            })
         const cart = new Cart(req.qty, product)
         return this.cartRepo.save(cart).then((r) => r.mapToRes())
     }
