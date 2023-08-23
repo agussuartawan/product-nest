@@ -20,15 +20,17 @@ exports.AppModule = AppModule = __decorate([
         imports: [
             typeorm_1.TypeOrmModule.forRoot({
                 type: "mysql",
-                host: "103.226.139.177",
+                host: "localhost",
                 port: 3306,
-                username: "onion",
-                password: "R3m0t3##0n!o11",
+                username: "root",
+                password: "root",
                 database: "product_nest",
                 autoLoadEntities: true,
-                synchronize: true
+                synchronize: true,
+                logging: true,
             }),
-            product_module_1.ProductModule, cart_module_1.CartModule
+            product_module_1.ProductModule,
+            cart_module_1.CartModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],

@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppController = void 0;
 const common_1 = require("@nestjs/common");
 const app_service_1 = require("./app.service");
-const simple_response_dto_1 = require("./dto/response/simple-response.dto");
+const simple_response_1 = require("./dto/response/simple.response");
 let AppController = exports.AppController = class AppController {
     constructor(appService) {
         this.appService = appService;
@@ -33,7 +33,7 @@ let AppController = exports.AppController = class AppController {
         return this.appService.helloName(name);
     }
     helloDto(body) {
-        return new simple_response_dto_1.SimpleResponseDto(null, body.message, body.details);
+        return new simple_response_1.SimpleResponse(null, body.message, body.details);
     }
 };
 __decorate([
@@ -67,8 +67,8 @@ __decorate([
     (0, common_1.Get)("/hello-dto"),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [simple_response_dto_1.SimpleResponseDto]),
-    __metadata("design:returntype", simple_response_dto_1.SimpleResponseDto)
+    __metadata("design:paramtypes", [simple_response_1.SimpleResponse]),
+    __metadata("design:returntype", simple_response_1.SimpleResponse)
 ], AppController.prototype, "helloDto", null);
 exports.AppController = AppController = __decorate([
     (0, common_1.Controller)("api/v1/learn"),

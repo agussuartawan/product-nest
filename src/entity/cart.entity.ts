@@ -1,18 +1,40 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm"
+import {
+    Column,
+    CreateDateColumn,
+    Entity,
+    ManyToOne,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn,
+} from "typeorm"
 import { Product } from "./product.entity"
+import { SimpleResponse } from "../dto/response/simple.response"
 
 @Entity()
 export class Cart {
     @PrimaryGeneratedColumn("uuid")
     id: string
 
-    @Column({type: "date"})
-    date: Date
-
     @Column()
     qty: number
 
-    @ManyToOne(() => Product, (product) => product.carts)
+    @CreateDateColumn()
+    createdAt: Date
+
+    @UpdateDateColumn()
+    updateAt: Date
+
+    @ManyToOne(() => Product, (product) => product.carts, { eager: true })
     product: Product
 
+    mapToRes(): SimpleResponse {
+        return new SimpleResponse(
+            this.id,
+            "Cart has added",
+            "Cart added perfectly bgst",
+        )
+    }
+
+    constructor(qty: number) {
+        this.qty = qty
+    }
 }

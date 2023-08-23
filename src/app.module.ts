@@ -4,23 +4,24 @@ import { AppService } from "./app.service"
 import { TypeOrmModule } from "@nestjs/typeorm"
 import { ProductModule } from "./module/product.module"
 import { CartModule } from "./module/cart.module"
-import * as process from "process"
 
 @Module({
-  imports: [
-    TypeOrmModule.forRoot({
-      type: "mysql",
-      host: "103.226.139.177",
-      port: 3306,
-      username: "onion",
-      password: "R3m0t3##0n!o11",
-      database: "product_nest",
-      autoLoadEntities: true,
-      synchronize: true
-    }),
-    ProductModule, CartModule
-  ],
-  controllers: [AppController],
-  providers: [AppService],
+    imports: [
+        TypeOrmModule.forRoot({
+            type: "mysql",
+            host: "localhost",
+            port: 3306,
+            username: "root",
+            password: "root",
+            database: "product_nest",
+            autoLoadEntities: true,
+            synchronize: true,
+            logging: true,
+        }),
+        ProductModule,
+        CartModule,
+    ],
+    controllers: [AppController],
+    providers: [AppService],
 })
 export class AppModule {}

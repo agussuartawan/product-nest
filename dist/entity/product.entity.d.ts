@@ -1,5 +1,5 @@
 import { Cart } from "./cart.entity";
-import { SimpleResponseDto } from "../dto/response/simple-response.dto";
+import { SimpleResponse } from "../dto/response/simple.response";
 export declare class Product {
     id: string;
     name: string;
@@ -9,7 +9,7 @@ export declare class Product {
     stock: number;
     createdAt: Date;
     updatedAt: Date;
-    deletedAt: Date;
+    deletedAt?: Date;
     carts: Cart[];
-    mapToRes(): SimpleResponseDto;
+    mapToRes(): SimpleResponse;
 }

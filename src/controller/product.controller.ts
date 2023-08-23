@@ -2,12 +2,10 @@ import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common"
 import { ProductService } from "../service/product.service"
 import { Product } from "../entity/product.entity"
 import { ProductRequest } from "../dto/request/product.request"
-import { SimpleResponseDto } from "../dto/response/simple-response.dto"
-import { DeleteResult } from "typeorm"
+import { SimpleResponse } from "../dto/response/simple.response"
 
 @Controller("api/v1/products")
 export class ProductController {
-
     constructor(private readonly productService: ProductService) {}
 
     @Get()
@@ -21,18 +19,29 @@ export class ProductController {
     }
 
     @Post()
-    async create(@Body() req: ProductRequest): Promise<SimpleResponseDto> {
+    async create(@Body() req: ProductRequest): Promise<SimpleResponse> {
         return await this.productService.create(req)
     }
 
     @Put("/:id")
-    async update(@Param("id") id: string, @Body() req: ProductRequest): Promise<SimpleResponseDto> {
+    async update(
+        @Param("id") id: string,
+        @Body() req: ProductRequest,
+    ): Promise<SimpleResponse> {
         return await this.productService.update(req, id)
     }
 
     @Delete("/:id")
-    async delete(@Param("id") id: string): Promise<SimpleResponseDto> {
-
-        return this.productService.delete(id).then(r => new SimpleResponseDto(null, "Product deleted", "Product has deleted perfectly"))
+    async delete(@Param("id") id: string): Promise<SimpleResponse> {
+        return this.productService
+            .delete(id)
+            .then(
+                (r) =>
+                    new SimpleResponse(
+                        null,
+                        "Product deleted",
+                        "Product has deleted perfectly",
+                    ),
+            )
     }
 }

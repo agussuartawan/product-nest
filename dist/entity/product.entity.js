@@ -12,13 +12,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Product = void 0;
 const typeorm_1 = require("typeorm");
 const cart_entity_1 = require("./cart.entity");
-const simple_response_dto_1 = require("../dto/response/simple-response.dto");
+const simple_response_1 = require("../dto/response/simple.response");
 let Product = exports.Product = class Product {
     constructor() {
         this.price = 6;
     }
     mapToRes() {
-        return new simple_response_dto_1.SimpleResponseDto(this.id, "Product has saved", "This product has saved perfectly");
+        return new simple_response_1.SimpleResponse(this.id, "Product has saved", "This product has saved perfectly");
     }
 };
 __decorate([
@@ -54,7 +54,7 @@ __decorate([
     __metadata("design:type", Date)
 ], Product.prototype, "updatedAt", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ default: null, type: "timestamp" }),
+    (0, typeorm_1.DeleteDateColumn)(),
     __metadata("design:type", Date)
 ], Product.prototype, "deletedAt", void 0);
 __decorate([

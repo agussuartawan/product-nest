@@ -16,7 +16,7 @@ exports.ProductController = void 0;
 const common_1 = require("@nestjs/common");
 const product_service_1 = require("../service/product.service");
 const product_request_1 = require("../dto/request/product.request");
-const simple_response_dto_1 = require("../dto/response/simple-response.dto");
+const simple_response_1 = require("../dto/response/simple.response");
 let ProductController = exports.ProductController = class ProductController {
     constructor(productService) {
         this.productService = productService;
@@ -34,7 +34,9 @@ let ProductController = exports.ProductController = class ProductController {
         return await this.productService.update(req, id);
     }
     async delete(id) {
-        return this.productService.delete(id).then(r => new simple_response_dto_1.SimpleResponseDto(null, "Product deleted", "Product has deleted perfectly"));
+        return this.productService
+            .delete(id)
+            .then((r) => new simple_response_1.SimpleResponse(null, "Product deleted", "Product has deleted perfectly"));
     }
 };
 __decorate([

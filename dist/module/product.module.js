@@ -18,7 +18,7 @@ exports.ProductModule = ProductModule = __decorate([
     (0, common_1.Module)({
         imports: [typeorm_1.TypeOrmModule.forFeature([product_entity_1.Product])],
         providers: [product_service_1.ProductService],
-        controllers: [product_controller_1.ProductController]
+        controllers: [product_controller_1.ProductController],
     })
 ], ProductModule);
 //# sourceMappingURL=product.module.js.map
