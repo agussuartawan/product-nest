@@ -17,8 +17,8 @@ export class Product {
     @Column()
     name: string
 
-    @Column()
-    description: string
+    @Column({ nullable: true })
+    description?: string
 
     @Column()
     category: string
@@ -28,6 +28,9 @@ export class Product {
 
     @Column()
     stock: number
+
+    @Column()
+    imageUrl?: string
 
     @CreateDateColumn()
     createdAt: Date

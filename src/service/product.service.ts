@@ -50,7 +50,7 @@ export class ProductService {
             throw new NotFoundException("Product not found")
         }
         return await this.productRepo
-            .delete(id)
+            .softDelete(id)
             .then(
                 () =>
                     new SimpleResponse(
@@ -67,6 +67,7 @@ export class ProductService {
         entity.category = req.category
         entity.price = req.price
         entity.stock = req.stock
+        entity.imageUrl = req.imageUrl
         return entity
     }
 }

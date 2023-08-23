@@ -7,5 +7,5 @@ export declare class Cart {
     updateAt: Date;
     product: Product;
     mapToRes(): SimpleResponse;
-    constructor(qty: number);
+    constructor(qty: number, product: Product);
 }

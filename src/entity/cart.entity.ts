@@ -34,7 +34,8 @@ export class Cart {
         )
     }
 
-    constructor(qty: number) {
+    constructor(qty: number, product: Product) {
         this.qty = qty
+        this.product = product
     }
 }

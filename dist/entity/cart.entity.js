@@ -17,8 +17,9 @@ let Cart = exports.Cart = class Cart {
     mapToRes() {
         return new simple_response_1.SimpleResponse(this.id, "Cart has added", "Cart added perfectly bgst");
     }
-    constructor(qty) {
+    constructor(qty, product) {
         this.qty = qty;
+        this.product = product;
     }
 };
 __decorate([
@@ -43,6 +44,6 @@ __decorate([
 ], Cart.prototype, "product", void 0);
 exports.Cart = Cart = __decorate([
     (0, typeorm_1.Entity)(),
-    __metadata("design:paramtypes", [Number])
+    __metadata("design:paramtypes", [Number, product_entity_1.Product])
 ], Cart);
 //# sourceMappingURL=cart.entity.js.map

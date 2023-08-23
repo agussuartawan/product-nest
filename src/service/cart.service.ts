@@ -32,9 +32,8 @@ export class CartService {
     }
 
     async create(req: CartRequest): Promise<SimpleResponse> {
-        const product = this.productRepo.findOneBy({ id: req.productId })
-        const cart = new Cart(req.qty)
-        cart.product = await product
+        const product = await this.productRepo.findOneBy({ id: req.productId })
+        const cart = new Cart(req.qty, product)
         return this.cartRepo.save(cart).then((r) => r.mapToRes())
     }
 }
