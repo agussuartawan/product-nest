@@ -1,6 +1,13 @@
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm"
+import {
+    Column,
+    CreateDateColumn,
+    DeleteDateColumn,
+    Entity,
+    OneToMany,
+    PrimaryGeneratedColumn,
+} from "typeorm"
 import { Cart } from "./cart.entity"
-import { SimpleResponseDto } from "../dto/response/simple-response.dto"
+import { SimpleResponse } from "../dto/response/simple.response"
 
 @Entity()
 export class Product {
@@ -28,13 +35,17 @@ export class Product {
     @CreateDateColumn()
     updatedAt: Date
 
-    @Column({default: null, type: "timestamp"})
-    deletedAt: Date
+    @DeleteDateColumn()
+    deletedAt?: Date
 
     @OneToMany(() => Cart, (cart) => cart.product)
     carts: Cart[]
 
-    mapToRes(): SimpleResponseDto {
-        return new SimpleResponseDto(this.id, "Product has saved", "This product has saved perfectly");
+    mapToRes(): SimpleResponse {
+        return new SimpleResponse(
+            this.id,
+            "Product has saved",
+            "This product has saved perfectly",
+        )
     }
 }

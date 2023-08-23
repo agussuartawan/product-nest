@@ -12,25 +12,37 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Cart = void 0;
 const typeorm_1 = require("typeorm");
 const product_entity_1 = require("./product.entity");
+const simple_response_1 = require("../dto/response/simple.response");
 let Cart = exports.Cart = class Cart {
+    mapToRes() {
+        return new simple_response_1.SimpleResponse(this.id, "Cart has added", "Cart added perfectly bgst");
+    }
+    constructor(qty) {
+        this.qty = qty;
+    }
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)("uuid"),
     __metadata("design:type", String)
 ], Cart.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: "date" }),
-    __metadata("design:type", Date)
-], Cart.prototype, "date", void 0);
-__decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Number)
 ], Cart.prototype, "qty", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => product_entity_1.Product, (product) => product.carts),
+    (0, typeorm_1.CreateDateColumn)(),
+    __metadata("design:type", Date)
+], Cart.prototype, "createdAt", void 0);
+__decorate([
+    (0, typeorm_1.UpdateDateColumn)(),
+    __metadata("design:type", Date)
+], Cart.prototype, "updateAt", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => product_entity_1.Product, (product) => product.carts, { eager: true }),
     __metadata("design:type", product_entity_1.Product)
 ], Cart.prototype, "product", void 0);
 exports.Cart = Cart = __decorate([
-    (0, typeorm_1.Entity)()
+    (0, typeorm_1.Entity)(),
+    __metadata("design:paramtypes", [Number])
 ], Cart);
 //# sourceMappingURL=cart.entity.js.map
