@@ -60,7 +60,7 @@ let ProductService = exports.ProductService = class ProductService {
             throw new common_1.NotFoundException("Product not found");
         }
         return await this.productRepo
-            .delete(id)
+            .softDelete(id)
             .then(() => new simple_response_1.SimpleResponse(null, "Product deleted", "Product deleted perfectly"));
     }
     map(req, entity) {
@@ -69,6 +69,7 @@ let ProductService = exports.ProductService = class ProductService {
         entity.category = req.category;
         entity.price = req.price;
         entity.stock = req.stock;
+        entity.imageUrl = req.imageUrl;
         return entity;
     }
 };

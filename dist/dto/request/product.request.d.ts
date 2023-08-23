@@ -4,4 +4,5 @@ export declare class ProductRequest {
     category: string;
     price: number;
     stock: number;
+    imageUrl: string;
 }
