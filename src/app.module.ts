@@ -1,20 +1,20 @@
 import { Module } from "@nestjs/common"
 import { AppController } from "./app.controller"
 import { AppService } from "./app.service"
-import { TypeOrmModule } from "@nestjs/typeorm"
 import { ProductModule } from "./module/product.module"
 import { CartModule } from "./module/cart.module"
 import { FirebaseModule } from "./firebase/firebase.module"
 import { NotificationModule } from "./module/notification.module"
-import * as process from "process"
+import { TypeOrmModule } from "@nestjs/typeorm"
 import * as dotenv from "dotenv"
 import * as path from "path"
 
+const ENV = process.env.NODE_ENV.trim()
 dotenv.config({
-    path: path.resolve(__dirname, `../.env.${process.env.NODE_ENV}`),
+    path: path.resolve(__dirname, `../.${ENV}.env`),
 })
-console.log(process.env.NODE_ENV)
-console.log(process.env.DATABASE_NAME)
+console.log(ENV)
+console.log(process.env.DATABASE_HOST)
 console.log(process.env.DATABASE_PORT)
 console.log(process.env.DATABASE_USER)
 console.log(process.env.DATABASE_PASSWORD)

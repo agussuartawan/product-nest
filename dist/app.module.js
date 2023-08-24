@@ -10,17 +10,18 @@ exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
-const typeorm_1 = require("@nestjs/typeorm");
 const product_module_1 = require("./module/product.module");
 const cart_module_1 = require("./module/cart.module");
 const firebase_module_1 = require("./firebase/firebase.module");
 const notification_module_1 = require("./module/notification.module");
-const config_1 = require("@nestjs/config");
-const process = require("process");
+const typeorm_1 = require("@nestjs/typeorm");
 const dotenv = require("dotenv");
 const path = require("path");
-const ENV = process.env.NODE_ENV;
-dotenv.config({ path: path.resolve(__dirname, "../.env") });
+const ENV = process.env.NODE_ENV.trim();
+dotenv.config({
+    path: path.resolve(__dirname, `../.${ENV}.env`),
+});
+console.log(ENV);
 console.log(process.env.DATABASE_HOST);
 console.log(process.env.DATABASE_PORT);
 console.log(process.env.DATABASE_USER);
@@ -31,9 +32,6 @@ let AppModule = exports.AppModule = class AppModule {
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            config_1.ConfigModule.forRoot({
-                envFilePath: !ENV ? ".env" : `.env.${ENV}`,
-            }),
             typeorm_1.TypeOrmModule.forRoot({
                 type: "mysql",
                 host: process.env.DATABASE_HOST,
