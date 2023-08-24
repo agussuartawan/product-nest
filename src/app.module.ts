@@ -13,6 +13,12 @@ import * as path from "path"
 dotenv.config({
     path: path.resolve(__dirname, `../.env.${process.env.NODE_ENV}`),
 })
+console.log(process.env.NODE_ENV)
+console.log(process.env.DATABASE_NAME)
+console.log(process.env.DATABASE_PORT)
+console.log(process.env.DATABASE_USER)
+console.log(process.env.DATABASE_PASSWORD)
+console.log(process.env.DATABASE_NAME)
 
 @Module({
     imports: [
