@@ -15,18 +15,32 @@ const product_module_1 = require("./module/product.module");
 const cart_module_1 = require("./module/cart.module");
 const firebase_module_1 = require("./firebase/firebase.module");
 const notification_module_1 = require("./module/notification.module");
+const config_1 = require("@nestjs/config");
+const process = require("process");
+const dotenv = require("dotenv");
+const path = require("path");
+const ENV = process.env.NODE_ENV;
+dotenv.config({ path: path.resolve(__dirname, "../.env") });
+console.log(process.env.DATABASE_HOST);
+console.log(process.env.DATABASE_PORT);
+console.log(process.env.DATABASE_USER);
+console.log(process.env.DATABASE_PASSWORD);
+console.log(process.env.DATABASE_NAME);
 let AppModule = exports.AppModule = class AppModule {
 };
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
+            config_1.ConfigModule.forRoot({
+                envFilePath: !ENV ? ".env" : `.env.${ENV}`,
+            }),
             typeorm_1.TypeOrmModule.forRoot({
                 type: "mysql",
-                host: "103.226.139.177",
-                port: 3306,
-                username: "onion",
-                password: "R3m0t3##0n!o11",
-                database: "product_nest",
+                host: process.env.DATABASE_HOST,
+                port: Number(process.env.DATABASE_PORT),
+                username: process.env.DATABASE_USER,
+                password: process.env.DATABASE_PASSWORD,
+                database: process.env.DATABASE_NAME,
                 autoLoadEntities: true,
                 synchronize: true,
                 logging: true,
