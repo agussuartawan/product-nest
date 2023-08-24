@@ -36,7 +36,7 @@ export class ProductController {
         return this.productService
             .delete(id)
             .then(
-                (r) =>
+                () =>
                     new SimpleResponse(
                         null,
                         "Product deleted",

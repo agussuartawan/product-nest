@@ -5,6 +5,7 @@ import { TypeOrmModule } from "@nestjs/typeorm"
 import { ProductModule } from "./module/product.module"
 import { CartModule } from "./module/cart.module"
 import { FirebaseModule } from "./firebase/firebase.module"
+import { NotificationModule } from "./module/notification.module"
 
 @Module({
     imports: [
@@ -22,6 +23,7 @@ import { FirebaseModule } from "./firebase/firebase.module"
         ProductModule,
         CartModule,
         FirebaseModule,
+        NotificationModule,
     ],
     controllers: [AppController],
     providers: [AppService],

@@ -36,7 +36,7 @@ let ProductController = exports.ProductController = class ProductController {
     async delete(id) {
         return this.productService
             .delete(id)
-            .then((r) => new simple_response_1.SimpleResponse(null, "Product deleted", "Product has deleted perfectly"));
+            .then(() => new simple_response_1.SimpleResponse(null, "Product deleted", "Product has deleted perfectly"));
     }
 };
 __decorate([
