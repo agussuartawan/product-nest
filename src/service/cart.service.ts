@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from "@nestjs/common"
 import { InjectRepository } from "@nestjs/typeorm"
 import { Cart } from "../entity/cart.entity"
 import { Repository } from "typeorm"
-import { SimpleResponse } from "../dto/response/simple.response"
+import { NumberResponse, SimpleResponse } from "../dto/response/simple.response"
 import { CartRequest } from "../dto/request/cart.request"
 import { Product } from "../entity/product.entity"
 import { CartResponse } from "../dto/response/cart/cart.response"
@@ -40,5 +40,9 @@ export class CartService {
             })
         const cart = new Cart(req.qty, product)
         return this.cartRepo.save(cart).then((r) => r.mapToRes())
+    }
+
+    async count(): Promise<NumberResponse> {
+        return new NumberResponse(await this.cartRepo.count())
     }
 }

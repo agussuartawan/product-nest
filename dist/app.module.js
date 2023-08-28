@@ -17,7 +17,7 @@ const notification_module_1 = require("./module/notification.module");
 const typeorm_1 = require("@nestjs/typeorm");
 const dotenv = require("dotenv");
 const path = require("path");
-const ENV = process.env.NODE_ENV.trim();
+const ENV = process.env.NODE_ENV ? process.env.NODE_ENV.trim() : "dev";
 dotenv.config({
     path: path.resolve(__dirname, `../.${ENV}.env`),
 });

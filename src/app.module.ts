@@ -9,7 +9,7 @@ import { TypeOrmModule } from "@nestjs/typeorm"
 import * as dotenv from "dotenv"
 import * as path from "path"
 
-const ENV = process.env.NODE_ENV.trim()
+const ENV = process.env.NODE_ENV ? process.env.NODE_ENV.trim() : "dev"
 dotenv.config({
     path: path.resolve(__dirname, `../.${ENV}.env`),
 })

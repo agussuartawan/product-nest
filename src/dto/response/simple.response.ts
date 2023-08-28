@@ -21,3 +21,11 @@ export class SimpleResponse {
     message: string
     details: string
 }
+
+export class NumberResponse {
+    data: number
+
+    constructor(data: number) {
+        this.data = data
+    }
+}
