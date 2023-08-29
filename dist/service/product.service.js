@@ -18,6 +18,7 @@ const typeorm_1 = require("@nestjs/typeorm");
 const product_entity_1 = require("../entity/product.entity");
 const typeorm_2 = require("typeorm");
 const simple_response_1 = require("../dto/response/simple.response");
+const product_client_response_1 = require("../dto/response/product/product-client.response");
 let ProductService = exports.ProductService = class ProductService {
     constructor(productRepo) {
         this.productRepo = productRepo;
@@ -62,6 +63,14 @@ let ProductService = exports.ProductService = class ProductService {
         return await this.productRepo
             .softDelete(id)
             .then(() => new simple_response_1.SimpleResponse(null, "Product deleted", "Product deleted perfectly"));
+    }
+    async findByIds(ids) {
+        const products = await this.productRepo
+            .createQueryBuilder("product")
+            .select(["id", "name", "price", "stock", "category", "description"])
+            .where({ id: (0, typeorm_2.In)(ids) })
+            .execute();
+        return product_client_response_1.ProductClientResponse.of(products);
     }
     map(req, entity) {
         entity.name = req.name;

@@ -3,6 +3,8 @@ import { ProductService } from "../service/product.service"
 import { Product } from "../entity/product.entity"
 import { ProductRequest } from "../dto/request/product.request"
 import { SimpleResponse } from "../dto/response/simple.response"
+import { IdsRequest } from "../dto/request/ids.request"
+import { ProductClientResponse } from "../dto/response/product/product-client.response"
 
 @Controller("api/v1/products")
 export class ProductController {
@@ -11,6 +13,11 @@ export class ProductController {
     @Get()
     async listALl(): Promise<Product[]> {
         return await this.productService.findAll()
+    }
+
+    @Post("/find-by-ids")
+    async findByIds(@Body() req: IdsRequest): Promise<ProductClientResponse[]> {
+        return await this.productService.findByIds(req.ids)
     }
 
     @Get("/:id")

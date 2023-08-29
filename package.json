@@ -9,7 +9,7 @@
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
-    "start:dev": "set NODE_ENV=dev && nest start --watch",
+    "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "export NODE_ENV=prod && git pull origin main && npm install && npm run build && pm2 delete product-cart-nest; pm2 start dist/main.js --name product-cart-nest && pm2 logs product-cart-nest",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",

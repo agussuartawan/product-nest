@@ -17,12 +17,16 @@ const common_1 = require("@nestjs/common");
 const product_service_1 = require("../service/product.service");
 const product_request_1 = require("../dto/request/product.request");
 const simple_response_1 = require("../dto/response/simple.response");
+const ids_request_1 = require("../dto/request/ids.request");
 let ProductController = exports.ProductController = class ProductController {
     constructor(productService) {
         this.productService = productService;
     }
     async listALl() {
         return await this.productService.findAll();
+    }
+    async findByIds(req) {
+        return await this.productService.findByIds(req.ids);
     }
     async findById(id) {
         return await this.productService.findOne(id);
@@ -45,6 +49,13 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], ProductController.prototype, "listALl", null);
+__decorate([
+    (0, common_1.Post)("/find-by-ids"),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [ids_request_1.IdsRequest]),
+    __metadata("design:returntype", Promise)
+], ProductController.prototype, "findByIds", null);
 __decorate([
     (0, common_1.Get)("/:id"),
     __param(0, (0, common_1.Param)("id")),

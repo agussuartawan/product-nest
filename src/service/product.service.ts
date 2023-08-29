@@ -1,9 +1,10 @@
 import { Injectable, NotFoundException } from "@nestjs/common"
 import { InjectRepository } from "@nestjs/typeorm"
 import { Product } from "../entity/product.entity"
-import { Repository } from "typeorm"
+import { In, Repository } from "typeorm"
 import { SimpleResponse } from "../dto/response/simple.response"
 import { ProductRequest } from "../dto/request/product.request"
+import { ProductClientResponse } from "../dto/response/product/product-client.response"
 
 @Injectable()
 export class ProductService {
@@ -59,6 +60,16 @@ export class ProductService {
                         "Product deleted perfectly",
                     ),
             )
+    }
+
+    async findByIds(ids: string[]): Promise<ProductClientResponse[]> {
+        const products = await this.productRepo
+            .createQueryBuilder("product")
+            .select(["id", "name", "price", "stock", "category", "description"])
+            .where({ id: In(ids) })
+            .execute()
+
+        return ProductClientResponse.of(products)
     }
 
     private map(req: ProductRequest, entity: Product): Product {
