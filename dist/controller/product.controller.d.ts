@@ -8,7 +8,7 @@ import { CategoryResponse } from "../dto/response/category/category.response";
 export declare class ProductController {
     private readonly productService;
     constructor(productService: ProductService);
-    listALl(): Promise<Product[]>;
+    listALl(categories?: string[], name?: string): Promise<Product[]>;
     findByIds(req: IdsRequest): Promise<ProductClientResponse[]>;
     findById(id: string): Promise<Product>;
     create(req: ProductRequest): Promise<SimpleResponse>;

@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from "@nestjs/common"
 import { InjectRepository } from "@nestjs/typeorm"
 import { Product } from "../entity/product.entity"
-import { In, Repository } from "typeorm"
+import { In, Like, Repository } from "typeorm"
 import { SimpleResponse } from "../dto/response/simple.response"
 import { ProductRequest } from "../dto/request/product.request"
 import { ProductClientResponse } from "../dto/response/product/product-client.response"
@@ -13,12 +13,19 @@ export class ProductService {
         @InjectRepository(Product) private productRepo: Repository<Product>,
     ) {}
 
-    findAll(): Promise<Product[]> {
-        return this.productRepo.find({
-            where: {
-                deletedAt: null,
-            },
-        })
+    findAll(categories: string[], name: string): Promise<Product[]> {
+        const query = this.productRepo
+            .createQueryBuilder("product")
+            .where("deletedAt is null")
+
+        if (name)
+            query.andWhere("name like concat('%', :name, '%')", { name: name })
+        if (categories)
+            query.andWhere("category in (:...categories)", {
+                categories: categories,
+            })
+
+        return query.execute()
     }
 
     async findOne(id: string): Promise<Product | null> {

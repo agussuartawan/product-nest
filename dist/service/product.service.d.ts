@@ -7,7 +7,7 @@ import { CategoryResponse } from "../dto/response/category/category.response";
 export declare class ProductService {
     private productRepo;
     constructor(productRepo: Repository<Product>);
-    findAll(): Promise<Product[]>;
+    findAll(categories: string[], name: string): Promise<Product[]>;
     findOne(id: string): Promise<Product | null>;
     create(req: ProductRequest): Promise<SimpleResponse>;
     update(req: ProductRequest, id: string): Promise<SimpleResponse>;

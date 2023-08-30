@@ -24,12 +24,17 @@ let ProductService = exports.ProductService = class ProductService {
     constructor(productRepo) {
         this.productRepo = productRepo;
     }
-    findAll() {
-        return this.productRepo.find({
-            where: {
-                deletedAt: null,
-            },
-        });
+    findAll(categories, name) {
+        const query = this.productRepo
+            .createQueryBuilder("product")
+            .where("deletedAt is null");
+        if (name)
+            query.andWhere("name like concat('%', :name, '%')", { name: name });
+        if (categories)
+            query.andWhere("category in (:...categories)", {
+                categories: categories,
+            });
+        return query.execute();
     }
     async findOne(id) {
         const r = await this.productRepo.findOneBy({ id });
