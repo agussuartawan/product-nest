@@ -15,7 +15,7 @@ export class ProductService {
 
     findAll(categories: string[], name: string): Promise<Product[]> {
         const query = this.productRepo
-            .createQueryBuilder("product")
+            .createQueryBuilder()
             .where("deletedAt is null")
 
         if (name)
@@ -25,7 +25,7 @@ export class ProductService {
                 categories: categories,
             })
 
-        return query.execute()
+        return query.getMany()
     }
 
     async findOne(id: string): Promise<Product | null> {

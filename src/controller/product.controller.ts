@@ -21,12 +21,12 @@ export class ProductController {
     constructor(private readonly productService: ProductService) {}
 
     @Get()
-    async listALl(
-        @Query("categories") categories?: string[],
+    listALl(
+        @Query("category") categories?: string[],
         @Query("name") name?: string,
     ): Promise<Product[]> {
         console.log(categories)
-        return await this.productService.findAll(categories, name)
+        return this.productService.findAll(categories, name)
     }
 
     @Post("/find-by-ids")

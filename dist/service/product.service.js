@@ -26,7 +26,7 @@ let ProductService = exports.ProductService = class ProductService {
     }
     findAll(categories, name) {
         const query = this.productRepo
-            .createQueryBuilder("product")
+            .createQueryBuilder()
             .where("deletedAt is null");
         if (name)
             query.andWhere("name like concat('%', :name, '%')", { name: name });
@@ -34,7 +34,7 @@ let ProductService = exports.ProductService = class ProductService {
             query.andWhere("category in (:...categories)", {
                 categories: categories,
             });
-        return query.execute();
+        return query.getMany();
     }
     async findOne(id) {
         const r = await this.productRepo.findOneBy({ id });

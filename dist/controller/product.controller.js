@@ -22,9 +22,9 @@ let ProductController = exports.ProductController = class ProductController {
     constructor(productService) {
         this.productService = productService;
     }
-    async listALl(categories, name) {
+    listALl(categories, name) {
         console.log(categories);
-        return await this.productService.findAll(categories, name);
+        return this.productService.findAll(categories, name);
     }
     async findByIds(req) {
         return await this.productService.findByIds(req.ids);
@@ -49,7 +49,7 @@ let ProductController = exports.ProductController = class ProductController {
 };
 __decorate([
     (0, common_1.Get)(),
-    __param(0, (0, common_1.Query)("categories")),
+    __param(0, (0, common_1.Query)("category")),
     __param(1, (0, common_1.Query)("name")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Array, String]),
