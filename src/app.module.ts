@@ -13,12 +13,6 @@ const ENV = process.env.NODE_ENV ? process.env.NODE_ENV.trim() : "dev"
 dotenv.config({
     path: path.resolve(__dirname, `../.${ENV}.env`),
 })
-console.log(ENV)
-console.log(process.env.DATABASE_HOST)
-console.log(process.env.DATABASE_PORT)
-console.log(process.env.DATABASE_USER)
-console.log(process.env.DATABASE_PASSWORD)
-console.log(process.env.DATABASE_NAME)
 
 @Module({
     imports: [
