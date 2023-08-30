@@ -42,6 +42,9 @@ let ProductController = exports.ProductController = class ProductController {
             .delete(id)
             .then(() => new simple_response_1.SimpleResponse(null, "Product deleted", "Product has deleted perfectly"));
     }
+    async getCategories() {
+        return this.productService.findCategories();
+    }
 };
 __decorate([
     (0, common_1.Get)(),
@@ -57,7 +60,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], ProductController.prototype, "findByIds", null);
 __decorate([
-    (0, common_1.Get)("/:id"),
+    (0, common_1.Get)("/:id/detail"),
     __param(0, (0, common_1.Param)("id")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
@@ -85,6 +88,12 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], ProductController.prototype, "delete", null);
+__decorate([
+    (0, common_1.Get)("/categories"),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], ProductController.prototype, "getCategories", null);
 exports.ProductController = ProductController = __decorate([
     (0, common_1.Controller)("api/v1/products"),
     __metadata("design:paramtypes", [product_service_1.ProductService])

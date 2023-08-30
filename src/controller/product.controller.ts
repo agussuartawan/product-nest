@@ -5,6 +5,7 @@ import { ProductRequest } from "../dto/request/product.request"
 import { SimpleResponse } from "../dto/response/simple.response"
 import { IdsRequest } from "../dto/request/ids.request"
 import { ProductClientResponse } from "../dto/response/product/product-client.response"
+import { CategoryResponse } from "../dto/response/category/category.response"
 
 @Controller("api/v1/products")
 export class ProductController {
@@ -20,7 +21,7 @@ export class ProductController {
         return await this.productService.findByIds(req.ids)
     }
 
-    @Get("/:id")
+    @Get("/:id/detail")
     async findById(@Param("id") id: string): Promise<Product> {
         return await this.productService.findOne(id)
     }
@@ -50,5 +51,10 @@ export class ProductController {
                         "Product has deleted perfectly",
                     ),
             )
+    }
+
+    @Get("/categories")
+    async getCategories(): Promise<CategoryResponse> {
+        return this.productService.findCategories()
     }
 }

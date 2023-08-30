@@ -19,6 +19,7 @@ const product_entity_1 = require("../entity/product.entity");
 const typeorm_2 = require("typeorm");
 const simple_response_1 = require("../dto/response/simple.response");
 const product_client_response_1 = require("../dto/response/product/product-client.response");
+const category_response_1 = require("../dto/response/category/category.response");
 let ProductService = exports.ProductService = class ProductService {
     constructor(productRepo) {
         this.productRepo = productRepo;
@@ -71,6 +72,14 @@ let ProductService = exports.ProductService = class ProductService {
             .where({ id: (0, typeorm_2.In)(ids) })
             .execute();
         return product_client_response_1.ProductClientResponse.of(products);
+    }
+    async findCategories() {
+        const categories = await this.productRepo
+            .createQueryBuilder("product")
+            .select("category")
+            .groupBy("category")
+            .execute();
+        return new category_response_1.CategoryResponse(categories.map((val) => val.category));
     }
     map(req, entity) {
         entity.name = req.name;

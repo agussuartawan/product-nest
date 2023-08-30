@@ -5,6 +5,7 @@ import { In, Repository } from "typeorm"
 import { SimpleResponse } from "../dto/response/simple.response"
 import { ProductRequest } from "../dto/request/product.request"
 import { ProductClientResponse } from "../dto/response/product/product-client.response"
+import { CategoryResponse } from "../dto/response/category/category.response"
 
 @Injectable()
 export class ProductService {
@@ -70,6 +71,15 @@ export class ProductService {
             .execute()
 
         return ProductClientResponse.of(products)
+    }
+
+    async findCategories(): Promise<CategoryResponse> {
+        const categories = await this.productRepo
+            .createQueryBuilder("product")
+            .select("category")
+            .groupBy("category")
+            .execute()
+        return new CategoryResponse(categories.map((val) => val.category))
     }
 
     private map(req: ProductRequest, entity: Product): Product {

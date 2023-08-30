@@ -4,6 +4,7 @@ import { ProductRequest } from "../dto/request/product.request";
 import { SimpleResponse } from "../dto/response/simple.response";
 import { IdsRequest } from "../dto/request/ids.request";
 import { ProductClientResponse } from "../dto/response/product/product-client.response";
+import { CategoryResponse } from "../dto/response/category/category.response";
 export declare class ProductController {
     private readonly productService;
     constructor(productService: ProductService);
@@ -13,4 +14,5 @@ export declare class ProductController {
     create(req: ProductRequest): Promise<SimpleResponse>;
     update(id: string, req: ProductRequest): Promise<SimpleResponse>;
     delete(id: string): Promise<SimpleResponse>;
+    getCategories(): Promise<CategoryResponse>;
 }
